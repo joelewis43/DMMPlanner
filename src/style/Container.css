@@ -1,0 +1,11 @@
+.component-container {
+  margin: 5px;
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  text-align: left;
+}
+
+.component-section {
+  height: 800px;
+  padding: 5px;
+}

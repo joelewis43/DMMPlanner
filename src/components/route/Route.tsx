@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import update from 'immutability-helper';
-import { useRouteContext } from '../providers/RouteProvider';
+import { useRouteContext } from '../../providers/RouteProvider';
 import DraggableStep from './DraggableStep';
-import { RouteStep } from '../types/RouteStep';
+import { RouteStep } from '../../types/RouteStep';
 
 const ItemType = 'TILE';
 

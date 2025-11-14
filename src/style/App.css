@@ -36,10 +36,6 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
-
 .nav {
   background-color: #fdb5b588;
   width: 100%;
@@ -53,7 +49,6 @@
 
 .options {
   width: 50%;
-  background-color: rgba(127, 255, 212, 0.329);
 }
 
 .route {

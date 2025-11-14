@@ -1,7 +1,10 @@
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { useRouteContext } from '../providers/RouteProvider';
-import { RouteStep } from '../types/RouteStep';
+import { useRouteContext } from '../../providers/RouteProvider';
+import { RouteStep } from '../../types/RouteStep';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface DraggableStepProps {
   step: RouteStep;
@@ -53,16 +56,21 @@ const DraggableStep: React.FC<DraggableStepProps> = ({ step, index, moveStep, ty
     <div ref={ref} className={`drag-task-container`}>
 
       <div className='route-col'>
-        <p className='step-content'>{step.name}</p>
+        <span className='step-content'>{step.name}</span>
       </div>
 
       <div className='route-col'>
-        <p className='step-content'>{step.id}</p>
+        <span className='step-content'>{step.id}</span>
       </div>
 
       <div className='button-container'>
         {/* <FaEdit className='step-button' onClick={() => editStep(step)}/> */}
-        <button className='step-button' onClick={() => deleteStepFromRoute(step.id)}/>
+        <button onClick={() => deleteStepFromRoute(step.id)} className="step-button">
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button onClick={() => deleteStepFromRoute(step.id)} className="step-button">
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
       </div>
     </div>
   );

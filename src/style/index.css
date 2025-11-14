@@ -1,9 +1,18 @@
 :root {
+  --color-background: #242424;
+  --color-primary: #0a09038c;
+  --color-secondary: #ff0000a6;
+  --color-third: #ff840083;
+  --color-fourth: #ffbf008c;
+  --color-text: #FFEAAE;
+}
+
+:root {
   color-scheme: light dark;
   background-color: #242424;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.87); /* Global Text Color */
+  color: var(--color-text);
   line-height: 1.5;
 
   font-synthesis: none;
@@ -17,17 +26,4 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

@@ -1,0 +1,60 @@
+export interface Skill {
+  name: string,
+  xp: number,
+  level: number,
+}
+
+export enum SkillName {
+  Attack = 'Attack',
+  Strength = 'Strength',
+  Defence = 'Defence',
+  Ranged = 'Ranged',
+  Prayer = 'Prayer',
+  Magic = 'Magic',
+  Runecraft = 'Runecraft',
+  Hitpoints = 'Hitpoints',
+  Crafting = 'Crafting',
+  Mining = 'Mining',
+  Smithing = 'Smithing',
+  Fishing = 'Fishing',
+  Cooking = 'Cooking',
+  Firemaking = 'Firemaking',
+  Woodcutting = 'Woodcutting',
+  Agility = 'Agility',
+  Herblore = 'Herblore',
+  Thieving = 'Thieving',
+  Fletching = 'Fletching',
+  Slayer = 'Slayer',
+  Farming = 'Farming',
+  Construction = 'Construction',
+  Hunter = 'Hunter',
+}
+
+export type PlayerSkills = Record<SkillName, Skill>;
+
+// Initialize with default values
+export const createDefaultSkills = (): PlayerSkills => ({
+  [SkillName.Attack]: { name: SkillName.Attack, xp: 0, level: 1 },
+  [SkillName.Strength]: { name: SkillName.Strength, xp: 0, level: 1 },
+  [SkillName.Defence]: { name: SkillName.Defence, xp: 0, level: 1 },
+  [SkillName.Ranged]: { name: SkillName.Ranged, xp: 0, level: 1 },
+  [SkillName.Prayer]: { name: SkillName.Prayer, xp: 0, level: 1 },
+  [SkillName.Magic]: { name: SkillName.Magic, xp: 0, level: 1 },
+  [SkillName.Runecraft]: { name: SkillName.Runecraft, xp: 0, level: 1 },
+  [SkillName.Hitpoints]: { name: SkillName.Hitpoints, xp: 1154, level: 10 },
+  [SkillName.Crafting]: { name: SkillName.Crafting, xp: 0, level: 1 },
+  [SkillName.Mining]: { name: SkillName.Mining, xp: 0, level: 1 },
+  [SkillName.Smithing]: { name: SkillName.Smithing, xp: 0, level: 1 },
+  [SkillName.Fishing]: { name: SkillName.Fishing, xp: 0, level: 1 },
+  [SkillName.Cooking]: { name: SkillName.Cooking, xp: 0, level: 1 },
+  [SkillName.Firemaking]: { name: SkillName.Firemaking, xp: 0, level: 1 },
+  [SkillName.Woodcutting]: { name: SkillName.Woodcutting, xp: 0, level: 1 },
+  [SkillName.Agility]: { name: SkillName.Agility, xp: 0, level: 1 },
+  [SkillName.Herblore]: { name: SkillName.Herblore, xp: 0, level: 1 },
+  [SkillName.Thieving]: { name: SkillName.Thieving, xp: 0, level: 1 },
+  [SkillName.Fletching]: { name: SkillName.Fletching, xp: 0, level: 1 },
+  [SkillName.Slayer]: { name: SkillName.Slayer, xp: 0, level: 1 },
+  [SkillName.Farming]: { name: SkillName.Farming, xp: 0, level: 1 },
+  [SkillName.Construction]: { name: SkillName.Construction, xp: 0, level: 1 },
+  [SkillName.Hunter]: { name: SkillName.Hunter, xp: 0, level: 1 },
+});

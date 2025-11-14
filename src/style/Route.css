@@ -1,54 +1,49 @@
-.task-controls {
-  /* background-color: #f8f9fa; */
-  /* Light Bootstrap-like gray */
-  margin: 0 auto;
-  margin-bottom: 8px;
-
-  text-align: center;
-  justify-content: left;
-  align-items: center;
-
-  display: flex;
+/* Main container */
+.route-container {
+  margin: 5px;
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  text-align: left;
 }
 
-.task-controls Button {
-  margin-left: 8px;
-}
+
+
+/* Header */
 
 .task-list-header {
-  background-color: #93a8ac50;
-  border-radius: 20px;
+   margin-left: 5px;
+  margin-right: 5px;
   display: flex;
-  padding: 5px;
+  border-bottom: 2px dotted var(--color-secondary);
 }
 
 .task-list-header h4 {
-  margin-bottom: 0;
-}
-
-.drag-task-container {
-  display: flex;
-
-  cursor: move;
-  background-color: #93A8AC;
-  border: 0;
-  border-radius: 20px;
-  padding: 5px;
-  margin-top: 5px;
-}
-
-.route-container {
-  margin: 10px;
-  text-align: left;
+  margin: 0;
+  padding-left: 3px;
 }
 
 .route-col {
   width: 30%;
 }
 
+
+
+/* Tasks */
+
 .step-container {
-  height: 800px;
+  height: 1000px;
   overflow-y: auto;
+}
+
+.drag-task-container {
+  display: flex;
+  cursor: move;
+  background-color: var(--color-third);
+  border: 0;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .step-content {
@@ -57,22 +52,35 @@
   display: flex;
   align-items: center;
   margin-bottom: 0;
+  padding-left: 3px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .button-container {
   margin: 0 auto;
-  width: 10%;
   display: flex;
   align-items: center;
   justify-content: right;
-  gap: 10px;
-  padding-right: 20px;
+  gap: 5px;
 }
 
 .step-button {
   cursor: pointer;
-  transform: scale(1.3);
+  font-size: 18px;
+  background: none;
+  border: none;
+  color: var(--color-text);
 }
+
+.step-button:hover {
+  color: var(--color-secondary);
+}
+
+
+
+/* Tasks types */
 
 .Tile-class {
   background-color: #9a9fce;
