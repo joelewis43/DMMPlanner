@@ -1,7 +1,6 @@
 #root {
-  max-width: 1280px;
+  width: 95%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -39,4 +38,24 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.nav {
+  background-color: #fdb5b588;
+  width: 100%;
+  top: 0;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+}
+
+.options {
+  width: 50%;
+  background-color: rgba(127, 255, 212, 0.329);
+}
+
+.route {
+  width: 50%;
 }
