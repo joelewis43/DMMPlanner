@@ -28,3 +28,12 @@ body {
   min-height: 100vh;
   /* background-color: var(--color-background); */
 }
+
+.no-select {
+  user-select: none;
+}
+
+.hover:hover {
+  cursor: pointer;
+  background-color: var(--mantine-color-gray-3);
+}

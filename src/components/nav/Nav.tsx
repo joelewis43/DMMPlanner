@@ -22,7 +22,7 @@ const Nav: React.FC<NavProps> = ({ updateSelection }) => {
     <a
       key={link.label}
       // href={link.link}
-      className={classes.link}
+      className={`hover ${classes.link}`}
       data-active={active === link.link || undefined}
       onClick={(event) => {
         event.preventDefault();
