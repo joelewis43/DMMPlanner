@@ -6,11 +6,11 @@ interface SkillViewerProps {
 
 const SkillViewer: React.FC<SkillViewerProps> = ({ }) => {
 
-  const { skills, getCombatLevel } = useSkillsContext();
+  const { skills, combatLevel } = useSkillsContext();
 
   return (
     <>
-    <div>Combat Level: {getCombatLevel()}</div>
+    <div>Combat Level: {combatLevel}</div>
       {Object.entries(skills).map(([name, skill]) => (
           <div key={name}>{name} -- {skill.level} -- {skill.xp}</div>
       ))}

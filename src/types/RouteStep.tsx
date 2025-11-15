@@ -4,7 +4,12 @@ export interface RouteStep {
   // input: string,
   // outputName: string,
   // outputValue: string,
-  // type: StepType,
+  type: RouteType,
 }
 
 export type RouteStepInput = Omit<RouteStep, 'id'>;
+
+export enum RouteType {
+  Quest = 'Quest',
+  Other = 'Other'
+}

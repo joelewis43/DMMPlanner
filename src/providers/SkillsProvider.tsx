@@ -1,22 +1,32 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createDefaultSkills, PlayerSkills, Skill, SkillName } from '../types/Skills';
+import { QuestData } from '../types/Quests';
+import { ComputeCombatLevel, DetermineLevel } from '../util/SkillsUtil';
 
 interface SkillsContextType {
   skills: PlayerSkills;
+  combatLevel: number;
   updateSkill: (name: SkillName, addedXp: number) => void;
-  getCombatLevel: () => number;
+  completeQuest: (quest: QuestData) => void;
 }
 
 const SkillsContext = createContext<SkillsContextType | undefined>(undefined);
 
 export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [skills, setSkills] = useState<PlayerSkills>(createDefaultSkills);
+  const [combatLevel, setCombatLevel] = useState<number>(ComputeCombatLevel(skills));
+
+  useEffect(() => {
+    setCombatLevel(ComputeCombatLevel(skills));
+  }, [skills]);
+
 
   const updateSkill = (name: SkillName, addedXp: number) => {
+    const newXp = skills[name].xp + addedXp;
     const updatedSkill: Skill = {
       name: name,
-      xp: skills[name].xp + addedXp,
-      level: skills[name].level
+      xp: newXp,
+      level: DetermineLevel(newXp)
     }
     setSkills(prev => ({
       ...prev,
@@ -24,26 +34,19 @@ export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }))
   }
 
-  const getCombatLevel = () => {
-    const defence = skills[SkillName.Defence].level;
-    const hitpoints = skills[SkillName.Hitpoints].level;
-    const prayer = skills[SkillName.Prayer].level;
-    const attack = skills[SkillName.Attack].level;
-    const strength = skills[SkillName.Strength].level;
-    const ranged = skills[SkillName.Ranged].level;
-    const magic = skills[SkillName.Magic].level;
+  const completeQuest = (quest: QuestData) => {
+    for (const skill in quest.xpRewards) {
+      const name = skill as SkillName;
+      const xp = quest.xpRewards[name];
 
-    const base = (1 / 4) * (defence + hitpoints + Math.floor(prayer * 0.5));
-    const melee = (13 / 40) * (attack + strength);
-    const range = (13 / 40) * Math.floor(ranged * 1.5);
-    const mage = (13 / 40) * Math.floor(magic * 1.5);
-    const final = Math.floor(base + Math.max(melee, range, mage));
-
-    return final;
+      if (xp !== undefined) {
+        updateSkill(name, xp);
+      }
+    }
   }
 
   return (
-    <SkillsContext.Provider value={{ skills, updateSkill, getCombatLevel }}>
+    <SkillsContext.Provider value={{ skills, combatLevel, updateSkill, completeQuest }}>
       {children}
     </SkillsContext.Provider>
   );

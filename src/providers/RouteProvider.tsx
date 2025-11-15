@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
-import { RouteStep, RouteStepInput } from '../types/RouteStep';
+import { RouteStep, RouteStepInput, RouteType } from '../types/RouteStep';
 import { v5 as uuidv5 } from 'uuid';
 import { v4 as uuidv4 } from 'uuid';
 import { QuestData } from '../types/Quests';
+import { useSkillsContext } from './SkillsProvider';
 
 
 interface RouteContextType {
@@ -20,6 +21,7 @@ const RouteContext = createContext<RouteContextType | undefined>(undefined);
 
 export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [route, setRoute] = useState<RouteStep[]>([]);
+  const { completeQuest } = useSkillsContext();
 
   const appendRoute = (input: RouteStepInput) => {
     const newId = uuidv5(input.name, uuidv5.DNS);
@@ -38,6 +40,13 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const deleteStepFromRoute = (id: string) => {
+    const foundStep = route.filter(s => s.id !== id);
+    if (foundStep.length > 0) {
+      if (foundStep[0].type === RouteType.Quest) {
+        // need to remove the XP, but to do that need to know what the xp was
+        // Can make a quest provider to access the quests and that may have other benefits later
+      }
+    }
     setRoute((prev) => prev.filter(s => s.id !== id));
   };
 
@@ -49,6 +58,7 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setRoute([...route, {
       name: "This is a test",
       id: uuidv4(),
+      type: RouteType.Other
     }])
   }
 
@@ -58,7 +68,9 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setRoute([...route, {
       name: input.name,
       id: newId,
+      type: RouteType.Quest
     }])
+    completeQuest(input);
   }
 
   const isPresent = (id: string) => {

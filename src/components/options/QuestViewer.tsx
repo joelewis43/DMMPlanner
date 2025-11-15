@@ -13,14 +13,7 @@ const QuestViewer: React.FC<QuestViewerProps> = ({ }) => {
     <div className='quest-container'>
       {quests.map(quest => (
         <div key={quest.name} className='quest-item' onDoubleClick={() => appendQuest(quest)}>
-          <h3>{quest.name}</h3>
-          <div>
-            {Object.entries(quest.xpRewards).map(([skillName, xp]) => (
-              <div key={skillName}>
-                {skillName}: {xp} XP
-              </div>
-            ))}
-          </div>
+          <h5>{quest.name}</h5>
         </div>
       ))}
     </div>
