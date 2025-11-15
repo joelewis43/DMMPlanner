@@ -4,19 +4,6 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,12 +23,6 @@
   padding: 2em;
 }
 
-.nav {
-  background-color: #fdb5b588;
-  width: 100%;
-  top: 0;
-}
-
 .content {
   width: 100%;
   display: flex;
@@ -53,4 +34,12 @@
 
 .route {
   width: 50%;
+}
+
+.content-frame {
+  width: 50%;
+  margin: 5px;
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  text-align: left;
 }

@@ -5,26 +5,28 @@ import { RouteProvider } from '../providers/RouteProvider'
 import Nav from '../components/nav/Nav'
 import { SkillsProvider } from '../providers/SkillsProvider'
 import OptionsToggle from '../components/options/OptionsToggle'
+import { MantineProvider } from '@mantine/core'
+import { useState } from 'react'
+import { Options } from '../types/OptionsEnum'
 
 function App() {
+    const [activeComponent, setActiveComponent] = useState(Options.Skills);
+
+    
   return (
-    <DndProvider backend={HTML5Backend}>
-      <SkillsProvider>
-        <RouteProvider>
-          <div className='nav'>
-            <Nav />
-          </div>
-          <div className='content'>
-            <div className='options'>
-              <OptionsToggle />
-            </div>
-            <div className='route'>
+    <MantineProvider>
+      <DndProvider backend={HTML5Backend}>
+        <SkillsProvider>
+          <RouteProvider>
+            <Nav updateSelection={setActiveComponent}/>
+            <div className='content'>
+              <OptionsToggle activeComponent={activeComponent}/>
               <Route />
             </div>
-          </div>
-        </RouteProvider>
-      </SkillsProvider>
-    </DndProvider>
+          </RouteProvider>
+        </SkillsProvider>
+      </DndProvider>
+    </MantineProvider>
   )
 }
 

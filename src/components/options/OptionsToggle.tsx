@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import SkillViewer from './SkillViewer';
 import QuestViewer from './QuestViewer';
+import { Options } from '../../types/OptionsEnum';
 
-function OptionsToggle() {
-  const [activeComponent, setActiveComponent] = useState('Quests');
+interface NavProps {
+  activeComponent: Options;
+}
+
+const OptionsToggle: React.FC<NavProps> = ({ activeComponent }) => {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'Quests':
+      case Options.Quests:
         return <QuestViewer />;
-      case 'Skills':
+      case Options.Skills:
         return <SkillViewer />;
       default:
         return <SkillViewer />;
@@ -18,19 +21,7 @@ function OptionsToggle() {
   };
 
   return (
-    <div className='component-container'>
-      <Dropdown onSelect={(eventKey) => setActiveComponent(eventKey as string)}>
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
-          {activeComponent}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item eventKey="Quests">Quests</Dropdown.Item>
-          <Dropdown.Item eventKey="Skills">Skills</Dropdown.Item>
-          <Dropdown.Item eventKey="ComponentC">Component C</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-
+    <div className='content-frame component-container'>
       <div className="component-section">
         {renderComponent()}
       </div>

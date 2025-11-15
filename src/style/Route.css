@@ -1,9 +1,6 @@
 /* Main container */
 .route-container {
-  margin: 5px;
-  background-color: var(--color-primary);
-  border-radius: 20px;
-  text-align: left;
+  
 }
 
 

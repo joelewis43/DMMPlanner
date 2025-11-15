@@ -26,7 +26,7 @@ const Route: React.FC<RouteProps> = ({ }) => {
   }, []);
 
   return (
-    <div className='route-container'>
+    <div className='content-frame route-container'>
       <div className='task-list-header'>
         <h4 className='route-col'>Step</h4>
         <h4 className='route-col'>ID</h4>
