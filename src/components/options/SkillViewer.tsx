@@ -1,22 +1,35 @@
-import React from 'react';
+import { Center, Group, Paper, RingProgress, SimpleGrid, Text, Tooltip } from '@mantine/core';
 import { useSkillsContext } from '../../providers/SkillsProvider';
 
-interface SkillViewerProps {
-}
-
-const SkillViewer: React.FC<SkillViewerProps> = ({ }) => {
+export default function StatsRing() {
 
   const { skills, combatLevel } = useSkillsContext();
 
-  return (
-    <>
-    <div>Combat Level: {combatLevel}</div>
-      {Object.entries(skills).map(([name, skill]) => (
-          <div key={name}>{name} -- {skill.level} -- {skill.xp}</div>
-      ))}
-    </>
+  const stats = Object.entries(skills).map(([name, skill]) => {
+    return (
+      <Paper withBorder radius="md" key={name}>
+        <Group>
+          <Tooltip key={name} label={`XP remaining: ${skill.xpToNextLeve}`}>
+            <RingProgress
+              size={50}
+              roundCaps
+              thickness={8}
+              sections={[{ value: skill.xpPercentage? skill.xpPercentage : 0, color: 'green' }]}
+            />
+          </Tooltip>
 
-  );
-};
+          <div>
+            <Text c="dimmed" size="xs" tt="uppercase" fw={700}>
+              {name}
+            </Text>
+            <Text fw={700} size="xl">
+              {skill.level}
+            </Text>
+          </div>
+        </Group>
+      </Paper>
+    );
+  });
 
-export default SkillViewer;
+  return <SimpleGrid cols={{ base: 1, sm: 3 }}>{stats}</SimpleGrid>;
+}

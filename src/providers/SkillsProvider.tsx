@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createDefaultSkills, PlayerSkills, Skill, SkillName } from '../types/Skills';
-import { ComputeCombatLevel, DetermineLevel } from '../util/SkillsUtil';
+import { ComputeCombatLevel, DetermineLevel, DetermineXpPercentage, DetermineXpToNextLevel } from '../util/SkillsUtil';
 
 interface SkillsContextType {
   skills: PlayerSkills;
@@ -21,10 +21,13 @@ export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const updateSkill = (name: SkillName, addedXp: number) => {
     const newXp = skills[name].xp + addedXp;
+    const newLevel = DetermineLevel(newXp);
     const updatedSkill: Skill = {
       name: name,
       xp: newXp,
-      level: DetermineLevel(newXp)
+      level: newLevel,
+      xpToNextLeve: DetermineXpToNextLevel(newXp, newLevel),
+      xpPercentage: DetermineXpPercentage(newXp, newLevel)
     }
     setSkills(prev => ({
       ...prev,

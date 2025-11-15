@@ -39,7 +39,7 @@
 .content-frame {
   width: 50%;
   margin: 5px;
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
   border-radius: 20px;
   text-align: left;
 }

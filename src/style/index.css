@@ -9,7 +9,7 @@
 
 :root {
   color-scheme: light dark;
-  background-color: #242424;
+  /* background-color: #242424; */
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: var(--color-text);
@@ -26,4 +26,5 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* background-color: var(--color-background); */
 }
