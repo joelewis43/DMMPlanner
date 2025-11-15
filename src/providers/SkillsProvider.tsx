@@ -1,13 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createDefaultSkills, PlayerSkills, Skill, SkillName } from '../types/Skills';
-import { QuestData } from '../types/Quests';
 import { ComputeCombatLevel, DetermineLevel } from '../util/SkillsUtil';
 
 interface SkillsContextType {
   skills: PlayerSkills;
   combatLevel: number;
   updateSkill: (name: SkillName, addedXp: number) => void;
-  completeQuest: (quest: QuestData) => void;
 }
 
 const SkillsContext = createContext<SkillsContextType | undefined>(undefined);
@@ -34,19 +32,8 @@ export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }))
   }
 
-  const completeQuest = (quest: QuestData) => {
-    for (const skill in quest.xpRewards) {
-      const name = skill as SkillName;
-      const xp = quest.xpRewards[name];
-
-      if (xp !== undefined) {
-        updateSkill(name, xp);
-      }
-    }
-  }
-
   return (
-    <SkillsContext.Provider value={{ skills, combatLevel, updateSkill, completeQuest }}>
+    <SkillsContext.Provider value={{ skills, combatLevel, updateSkill }}>
       {children}
     </SkillsContext.Provider>
   );

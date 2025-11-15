@@ -1,10 +1,15 @@
 import { SkillName } from "./Skills";
-import questsData from '../data/quests.json';
+import questsDataRaw from '../data/quests.json';
 
 export interface QuestData {
   name: string,
-  xpRewards: Partial<Record<SkillName, number>>
+  xpRewards: Partial<Record<SkillName, number>>,
+  completed: boolean
 }
 
-
-export const quests: QuestData[] = questsData;
+export const questsMap: Map<string, QuestData> = new Map(
+  Object.entries(questsDataRaw).map(([name, data]) => [
+    name,
+    {...data, name: name, completed: false}
+  ])
+);

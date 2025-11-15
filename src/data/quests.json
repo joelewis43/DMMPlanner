@@ -1,22 +1,19 @@
-[
-  {
-    "name": "Waterfall Quest",
+{
+  "Waterfall Quest": {
     "xpRewards": {
       "Attack": 13750,
       "Strength": 13750
     }
   },
-  {
-    "name": "Tree Gnome Village",
+  "Tree Gnome Village": {
     "xpRewards": {
       "Attack": 11450
     }
   },
-  {
-    "name": "Fight Arena",
+  "Fight Arena": {
     "xpRewards": {
       "Attack": 12175,
       "Thieving": 2175
     }
   }
-]
+}

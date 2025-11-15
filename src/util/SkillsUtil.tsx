@@ -15,8 +15,6 @@ export const ComputeCombatLevel = (skills: PlayerSkills) => {
     const mage = (13 / 40) * Math.floor(magic * 1.5);
     const final = Math.floor(base + Math.max(melee, range, mage));
 
-    console.log("attack: " + attack);
-    console.log("Combat level is: " + final);
     return final;
   }
 
