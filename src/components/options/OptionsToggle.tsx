@@ -4,14 +4,14 @@ import SkillViewer from './SkillViewer';
 import QuestViewer from './QuestViewer';
 
 function OptionsToggle() {
-  const [activeComponent, setActiveComponent] = useState('Skills');
+  const [activeComponent, setActiveComponent] = useState('Quests');
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'Skills':
-        return <SkillViewer />;
       case 'Quests':
         return <QuestViewer />;
+      case 'Skills':
+        return <SkillViewer />;
       default:
         return <SkillViewer />;
     }
@@ -25,8 +25,8 @@ function OptionsToggle() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item eventKey="Skills">Skills</Dropdown.Item>
           <Dropdown.Item eventKey="Quests">Quests</Dropdown.Item>
+          <Dropdown.Item eventKey="Skills">Skills</Dropdown.Item>
           <Dropdown.Item eventKey="ComponentC">Component C</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
