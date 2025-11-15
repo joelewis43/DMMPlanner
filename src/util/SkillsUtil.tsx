@@ -18,6 +18,10 @@ export const ComputeCombatLevel = (skills: PlayerSkills) => {
   return final;
 }
 
+export const ComputeTotalLevel = (skills: PlayerSkills) => {
+  return Object.values(skills).reduce((sum, skill) => sum + skill.level, 0);
+}
+
 export const DetermineLevel = (xp: number) => {
   if (xp < 0) return 1;
 

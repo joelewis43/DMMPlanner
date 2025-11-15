@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createDefaultSkills, PlayerSkills, Skill, SkillName } from '../types/Skills';
-import { ComputeCombatLevel, DetermineLevel, DetermineXpPercentage, DetermineXpToNextLevel } from '../util/SkillsUtil';
+import { ComputeCombatLevel, ComputeTotalLevel, DetermineLevel, DetermineXpPercentage, DetermineXpToNextLevel } from '../util/SkillsUtil';
 
 interface SkillsContextType {
   skills: PlayerSkills;
   combatLevel: number;
+  totalLevel: number;
   updateSkill: (name: SkillName, addedXp: number) => void;
 }
 
@@ -13,9 +14,11 @@ const SkillsContext = createContext<SkillsContextType | undefined>(undefined);
 export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [skills, setSkills] = useState<PlayerSkills>(createDefaultSkills);
   const [combatLevel, setCombatLevel] = useState<number>(ComputeCombatLevel(skills));
+  const [totalLevel, setTotalLevel] = useState<number>(ComputeTotalLevel(skills));
 
   useEffect(() => {
     setCombatLevel(ComputeCombatLevel(skills));
+    setTotalLevel(ComputeTotalLevel(skills));
   }, [skills]);
 
 
@@ -36,7 +39,7 @@ export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   }
 
   return (
-    <SkillsContext.Provider value={{ skills, combatLevel, updateSkill }}>
+    <SkillsContext.Provider value={{ skills, combatLevel, totalLevel, updateSkill }}>
       {children}
     </SkillsContext.Provider>
   );

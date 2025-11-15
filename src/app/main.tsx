@@ -8,7 +8,6 @@ import '../style/index.css'
 import '../style/App.css'
 import '../style/Route.css'
 import '../style/Container.css'
-import '../style/Quest.css'
 
 
 createRoot(document.getElementById('root')!).render(
