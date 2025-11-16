@@ -1,4 +1,6 @@
 export enum Options {
   Quests,
-  Skills
+  Skills,
+  DmmTasks,
+  DmmShop,
 }

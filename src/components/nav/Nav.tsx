@@ -8,6 +8,8 @@ import { Options } from '../../types/OptionsEnum';
 const links = [
   { link: Options.Skills, label: 'Skils' },
   { link: Options.Quests, label: 'Quests' },
+  { link: Options.DmmTasks, label: 'DMM Tasks' },
+  { link: Options.DmmShop, label: 'Skull Shop' },
 ];
 
 interface NavProps {
