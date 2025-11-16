@@ -74,3 +74,18 @@ export const XP_TABLE: number[] = [
   3597792, 3972294, 4385776, 4842295, 5346332, 5902831, 6517253, 7195629,
   7944614, 8771558, 9684577, 10692629, 11805606, 13034431
 ];
+
+export interface XpMultiplierTier {
+  low: number;
+  high: number;
+  combatRate: number;
+  nonCombatRate: number;
+}
+
+// nonCombatRate could just be a const, but including incase it does end up changing before launch
+export const XP_MULTIPLIERS: XpMultiplierTier[] = [
+  { low: 3, high: 60, combatRate: 10, nonCombatRate: 10 },
+  { low: 61, high: 80, combatRate: 15, nonCombatRate: 10 },
+  { low: 81, high: 95, combatRate: 15, nonCombatRate: 10 },
+  { low: 96, high: 200, combatRate: 20, nonCombatRate: 10 },
+];

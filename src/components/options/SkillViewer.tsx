@@ -2,11 +2,13 @@ import { Center, Group, Paper, RingProgress, SimpleGrid, Text, Tooltip } from '@
 import { useSkillsContext } from '../../providers/SkillsProvider';
 
 export default function StatsRing() {
-  const { skills, combatLevel, totalLevel } = useSkillsContext();
+  const { skills, combatLevel, totalLevel, combatMultiplier, nonCombatMultiplier } = useSkillsContext();
 
   const summaryStats = [
+    { label: 'Combat Multipler', value: combatMultiplier },
+    { label: 'Skilling Multipler', value: nonCombatMultiplier },
     { label: 'Combat Level', value: combatLevel },
-    { label: 'Total Level', value: totalLevel }
+    { label: 'Total Level', value: totalLevel },
   ];
 
   const sumStats = summaryStats.map(({ label, value }) => (

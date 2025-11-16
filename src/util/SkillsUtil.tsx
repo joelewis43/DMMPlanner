@@ -1,4 +1,4 @@
-import { PlayerSkills, SkillName, XP_TABLE } from "../types/Skills";
+import { PlayerSkills, SkillName, XP_MULTIPLIERS, XP_TABLE } from "../types/Skills";
 
 export const ComputeCombatLevel = (skills: PlayerSkills) => {
   const defence = skills[SkillName.Defence].level;
@@ -43,4 +43,11 @@ export const DetermineXpPercentage = (xp: number, curLevel: number) => {
   const dem = (XP_TABLE[curLevel]-XP_TABLE[curLevel-1]);
   console.log(num + " / " + dem + " = " + num/dem);
   return num/dem * 100;
+}
+
+export const GetXpMultiplier = (combatLevel: number, combat: boolean) => {
+  const tier = XP_MULTIPLIERS.find(
+    (tier) => combatLevel >= tier.low && combatLevel <= tier.high
+  );
+  return combat ? tier!.combatRate : tier!.nonCombatRate;
 }
