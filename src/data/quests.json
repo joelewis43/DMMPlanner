@@ -1,19 +1,35 @@
 {
   "Waterfall Quest": {
-    "xpRewards": {
-      "Attack": 13750,
-      "Strength": 13750
+    "rewards": {
+      "xpRewards": {
+        "Attack": 13750,
+        "Strength": 13750
+      }
     }
   },
   "Tree Gnome Village": {
-    "xpRewards": {
-      "Attack": 11450
+    "rewards": {
+      "xpRewards": {
+        "Attack": 11450
+      }
     }
   },
   "Fight Arena": {
-    "xpRewards": {
-      "Attack": 12175,
-      "Thieving": 2175
+    "rewards": {
+      "xpRewards": {
+        "Attack": 12175,
+        "Thieving": 2175
+      }
+    }
+  },
+  "A Tail of Two Cats": {
+    "rewards": {
+      "lamps": {
+        "skillChoice": "Any",
+        "levelReq": 30,
+        "grants": 2,
+        "xpValue": 2500
+      }
     }
   }
 }
