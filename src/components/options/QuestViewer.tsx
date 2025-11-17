@@ -25,6 +25,7 @@ export default function QuestViewer() {
   const { appendQuest } = useRouteContext();
 
   const handleQuestDoubleClick = (name: string, questData: QuestData) => {
+    if (questData.completed) return;
     completeQuest(name);
     appendQuest(questData);
   }
