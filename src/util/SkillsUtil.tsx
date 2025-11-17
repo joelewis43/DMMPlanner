@@ -41,7 +41,6 @@ export const DetermineXpToNextLevel = (xp: number, curLevel: number) => {
 export const DetermineXpPercentage = (xp: number, curLevel: number) => {
   const num = (xp - XP_TABLE[curLevel-1]);
   const dem = (XP_TABLE[curLevel]-XP_TABLE[curLevel-1]);
-  console.log(num + " / " + dem + " = " + num/dem);
   return num/dem * 100;
 }
 

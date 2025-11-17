@@ -48,7 +48,6 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const foundStep = route.filter(s => s.id === id);
     if (foundStep.length > 0) {
       if (foundStep[0].type === RouteType.Quest) {
-        console.log("I should be deleting quest xp");
         incompleteQuest(foundStep[0].name)
       }
     }

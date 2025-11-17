@@ -15,6 +15,8 @@
     "@fortawesome/react-fontawesome": "^3.1.0",
     "@mantine/core": "^8.3.8",
     "@mantine/hooks": "^8.3.8",
+    "@tabler/icons": "^3.35.0",
+    "@tabler/icons-react": "^3.35.0",
     "bootstrap": "^5.3.8",
     "immutability-helper": "^3.1.1",
     "react": "^18.3.1",

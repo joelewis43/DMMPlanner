@@ -21,10 +21,8 @@ const OptionsToggle: React.FC<NavProps> = ({ activeComponent }) => {
   };
 
   return (
-    <div className='content-frame component-container'>
-      <div className="component-section">
+    <div className='content-frame component-section'>
         {renderComponent()}
-      </div>
     </div>
   );
 }

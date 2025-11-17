@@ -1,9 +1,235 @@
 {
-  "Waterfall Quest": {
+  "template": {
     "rewards": {
       "xpRewards": {
-        "Attack": 13750,
-        "Strength": 13750
+        "Attack": 12175,
+        "Thieving": 2175
+      },
+      "lamps": {
+        "skillChoice": "Any",
+        "levelReq": 30,
+        "grants": 2,
+        "xpValue": 2500
+      }
+    }
+  },
+  "Cook's Assistant": {
+    "rewards": {
+      "xpRewards": {
+        "Cooking": 300
+      }
+    }
+  },
+  "Demon Slayer": {
+    "rewards": {}
+  },
+  "The Restless Ghost": {
+    "rewards": {
+      "xpRewards": {
+        "Prayer": 1125
+      }
+    }
+  },
+  "Romeo & Juliet": {
+    "rewards": {}
+  },
+  "Sheep Shearer": {
+    "rewards": {
+      "xpRewards": {
+        "Crafting": 150
+      }
+    }
+  },
+  "Shield of Arrav": {
+    "rewards": {
+      "lamps": {
+        "skillChoice": "Any",
+        "levelReq": 20,
+        "grants": 1,
+        "xpValue": 1000
+      }
+    }
+  },
+  "Ernest the Chicken": {
+    "rewards": {}
+  },
+  "Vampyre Slayer": {
+    "rewards": {
+      "xpRewards": {
+        "Attack": 4825
+      }
+    }
+  },
+  "Imp Catcher": {
+    "rewards": {
+      "xpRewards": {
+        "Magic": 875
+      }
+    }
+  },
+  "Price Ali Rescue": {
+    "rewards": {}
+  },
+  "Doric's Quest": {
+    "rewards": {
+      "xpRewards": {
+        "Mining": 1300
+      }
+    }
+  },
+  "Black Knights' Fortress": {
+    "rewards": {}
+  },
+  "Witch's Potion": {
+    "rewards": {
+      "xpRewards": {
+        "Magic": 325
+      }
+    }
+  },
+  "The Knight's Sword": {
+    "rewards": {
+      "xpRewards": {
+        "Smithing": 12725
+      }
+    }
+  },
+  "Goblin Diplomacy": {
+    "rewards": {
+      "xpRewards": {
+        "Crafting": 200
+      }
+    }
+  },
+  "Pirate's Treasure": {
+    "rewards": {}
+  },
+  "Dragon Slayer I": {
+    "rewards": {
+      "xpRewards": {
+        "Strength": 18650,
+        "Defence": 18650
+      }
+    }
+  },
+  "Rune Mysteries": {
+    "rewards": {}
+  },
+  "Misthalin Mystery": {
+    "rewards": {
+      "xpRewards": {
+        "Crafting": 600
+      }
+    }
+  },
+  "The Corsair Curse": {
+    "rewards": {}
+  },
+  "X Marks the Spot": {
+    "rewards": {
+      "lamps": {
+        "skillChoice": "Any",
+        "levelReq": 1,
+        "grants": 1,
+        "xpValue": 300
+      }
+    }
+  },
+  "Below Ice Mountain": {
+    "rewards": {}
+  },
+  "Druidic Ritual": {
+    "rewards": {
+      "xpRewards": {
+        "Herblore": 250
+      }
+    }
+  },
+  "Lost City": {
+    "rewards": {}
+  },
+  "Witch's House": {
+    "rewards": {
+      "xpRewards": {
+        "Hitpoints": 6325
+      }
+    }
+  },
+  "Merlin's Crystal": {
+    "rewards": {
+      "lamps": {
+        "skillChoice": "Any",
+        "levelReq": 20,
+        "grants": 1,
+        "xpValue": 1000
+      }
+    }
+  },
+  "Heros' Quest": {
+    "rewards": {
+      "xpRewards": {
+        "Attack": 3075,
+        "Strength": 3075,
+        "Defence": 3075,
+        "Hitpoints": 3075,
+        "Range": 2075,
+        "Fishing": 2725,
+        "Cooking": 2825,
+        "Woodcutting": 1575,
+        "Firemaking": 1575,
+        "Smithing": 2275,
+        "Mining": 2575,
+        "Herblore": 1325
+      }
+    }
+  },
+  "Scorpion Catcher": {
+    "rewards": {
+      "xpRewards": {
+        "Strength": 6625
+      }
+    }
+  },
+  "Family Crest": {
+    "rewards": {}
+  },
+  "Tribal Totem": {
+    "rewards": {
+      "xpRewards": {
+        "Thieving": 1775
+      }
+    }
+  },
+  "Fishing Contest": {
+    "rewards": {
+      "xpRewards": {
+        "Fishing": 2437
+      }
+    }
+  },
+  "Monk's Friend": {
+    "rewards": {
+      "xpRewards": {
+        "Woodcutting": 2000
+      }
+    }
+  },
+  "Temple of Ikov": {
+    "rewards": {
+      "xpRewards": {
+        "Range": 10500,
+        "Fletching": 8000
+      }
+    }
+  },
+  "Clock Tower": {
+    "rewards": {}
+  },
+  "Holy Grail": {
+    "rewards": {
+      "xpRewards": {
+        "Prayer": 11000,
+        "Defence": 15300
       }
     }
   },
@@ -22,13 +248,58 @@
       }
     }
   },
-  "A Tail of Two Cats": {
+  "Hazeel Cult": {
     "rewards": {
-      "lamps": {
-        "skillChoice": "Any",
-        "levelReq": 30,
-        "grants": 2,
-        "xpValue": 2500
+      "xpRewards": {
+        "Thieving": 1500
+      }
+    }
+  },
+  "Sheep Herder": {
+    "rewards": {}
+  },
+  "Plague City": {
+    "rewards": {
+      "xpRewards": {
+        "Mining": 2425
+      }
+    }
+  },
+  "Sea Slug": {
+    "rewards": {
+      "xpRewards": {
+        "Fishing": 7175
+      }
+    }
+  },
+  "Waterfall Quest": {
+    "rewards": {
+      "xpRewards": {
+        "Attack": 13750,
+        "Strength": 13750
+      }
+    }
+  },
+  "Biohazard": {
+    "rewards": {
+      "xpRewards": {
+        "Thieving": 1250
+      }
+    }
+  },
+  "Jungle Potion": {
+    "rewards": {
+      "xpRewards": {
+        "Herblore": 775
+      }
+    }
+  },
+  "The Grand Tree": {
+    "rewards": {
+      "xpRewards": {
+        "Attack": 18400,
+        "Thieving": 7900,
+        "Magic": 2150
       }
     }
   }

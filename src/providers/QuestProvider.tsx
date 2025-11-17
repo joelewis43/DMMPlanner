@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { QuestData, questsMap } from '../types/Quests';
+import { QuestData, questsMap, XpLamp } from '../types/Quests';
 import { useSkillsContext } from './SkillsProvider';
 import { SkillName } from '../types/Skills';
 import { useDisclosure } from '@mantine/hooks';
@@ -11,6 +11,13 @@ interface QuestContextType {
   incompleteQuest: (name: string) => void;
 }
 
+interface RenderLampData {
+  lamp: XpLamp;
+  removeXp: boolean;
+  remainingGrants: number;
+  questName: string;
+}
+
 const QuestContext = createContext<QuestContextType | undefined>(undefined);
 
 export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -19,11 +26,7 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Modal state
   const [opened, { open, close }] = useDisclosure(false);
-  const [pendingLamp, setPendingLamp] = useState<{
-    quest: QuestData;
-    removeXp: boolean;
-    remainingGrants: number;
-  } | null>(null);
+  const [activeLamp, setActiveLamp] = useState<RenderLampData>();
 
   const completeQuest = (name: string) => {
     if (quests.has(name)) {
@@ -52,27 +55,23 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
     }
 
-    // Handle XP lamp - show modal for skill selection
+    // Ingress for Lamp workflow
     if (quest.rewards?.lamps) {
       const lamp = quest.rewards.lamps;
-
-      if (lamp.skillChoice === 'Any' || Array.isArray(lamp.skillChoice)) {
-        // Open modal for user to choose skill(s)
-        setPendingLamp({
-          quest,
-          removeXp,
-          remainingGrants: lamp.grants
-        });
-        open();
-      }
+      setActiveLamp({
+        lamp,
+        removeXp,
+        remainingGrants: lamp.grants,
+        questName: quest.name
+      });
+      open();
     }
   };
 
 
   const handleSkillSelection = (selectedSkill: SkillName) => {
-    if (pendingLamp) {
-      const { quest, removeXp, remainingGrants } = pendingLamp;
-      const lamp = quest.rewards.lamps!;
+    if (activeLamp) {
+      const { lamp, removeXp, remainingGrants } = activeLamp;
 
       // Apply XP for this single grant
       let xp = lamp.xpValue;
@@ -83,25 +82,25 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const newRemainingGrants = remainingGrants - 1;
       if (newRemainingGrants > 0) {
         // Update remaining grants and keep modal open
-        setPendingLamp({ quest, removeXp, remainingGrants: newRemainingGrants });
+        setActiveLamp({ ...activeLamp, remainingGrants: newRemainingGrants });
       } else {
         // All grants used, close modal
         close();
-        setPendingLamp(null);
+        setActiveLamp(undefined);
       }
     }
   };
 
   const handleModalClose = () => {
     close();
-    setPendingLamp(null);
+    setActiveLamp(undefined);
   };
 
   // Get available skills from the lamp
   const getAvailableSkills = (): SkillName[] => {
-    if (!pendingLamp) return [];
+    if (!activeLamp) return [];
 
-    const lamp = pendingLamp.quest.rewards.lamps!;
+    const lamp = activeLamp.lamp;
     if (lamp.skillChoice === 'Any') {
       return Object.values(SkillName);
     } else if (Array.isArray(lamp.skillChoice)) {
@@ -114,23 +113,19 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <QuestContext.Provider value={{ quests, completeQuest, incompleteQuest }}>
       {children}
 
-      {/* Skill Selection Modal */}
       <Modal
         opened={opened}
         onClose={handleModalClose}
         closeOnClickOutside={false}
         closeOnEscape={false}
         withCloseButton={false}
-        title={pendingLamp ? `Choose a Skill for ${pendingLamp.quest.name}` : ''}
+        title={activeLamp ? `Choose a Skill for ${activeLamp.questName}` : ''}
         centered
         size="md"
       >
-        {pendingLamp && (
+        {activeLamp && (
           <>
-            <p>
-              Select which skill to apply {pendingLamp.quest.rewards.lamps!.xpValue} XP to
-              {` (${pendingLamp.remainingGrants} selections remaining)`}
-            </p>
+            <p>Select which skill to apply {activeLamp.lamp.xpValue} XP to {`(${activeLamp.remainingGrants} selections remaining)`}</p>
             <SimpleGrid cols={{ base: 1, sm: 3 }} >
               {getAvailableSkills().map(skill => (
                 <Button variant="filled" key={skill} onClick={() => handleSkillSelection(skill)}>

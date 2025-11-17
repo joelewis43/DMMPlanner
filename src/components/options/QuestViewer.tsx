@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Table, Text, TextInput } from '@mantine/core';
+import { Table, Text, TextInput, ActionIcon, Tooltip } from '@mantine/core';
 import { useQuestContext } from '../../providers/QuestProvider';
 import { useRouteContext } from '../../providers/RouteProvider';
 import { QuestData } from '../../types/Quests';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 interface ThProps {
   children: React.ReactNode;
@@ -31,9 +32,20 @@ export default function QuestViewer() {
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState([...quests.entries()]);
 
-  function filterData(search: string) {
-    const query = search.toLowerCase().trim();
-    return sortedData.filter((q) => q[0].toLowerCase().includes(query));
+  function filterData(input: string) {
+    const query = input.toLowerCase();
+    return Array.from(quests).filter(([name, questData]) => {
+      const nameCheck = name.toLowerCase().includes(query);
+
+      let hasMatchingXpReward: boolean = false;
+      const xpRewards = questData.rewards.xpRewards;
+      if (xpRewards) {
+        hasMatchingXpReward = Object.keys(xpRewards).some(
+          (skillName: string) => skillName.toLowerCase().includes(query)
+        );
+      }
+      return nameCheck || hasMatchingXpReward;
+    })
   }
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,30 +61,43 @@ export default function QuestViewer() {
     </Table.Tr>
   ));
 
+  const tooltipIcon = (
+    <Tooltip
+      label={"Search for quest names or skill xp rewards"}
+      position="bottom-end"
+      multiline
+      w={200} // Set a width for the multiline tooltip
+    >
+        <IconInfoCircle />
+    </Tooltip>
+  );
+
   return (
-    <div>
+    <div className="quest-table" >
       <TextInput
         placeholder="Search by any field"
         mb="md"
-        // leftSection={<IconSearch size={16} stroke={1.5} />}
+        rightSection={tooltipIcon}
         value={search}
         onChange={handleSearchChange}
       />
-      <Table horizontalSpacing="md" verticalSpacing="xs" layout="fixed">
-        <Table.Thead>
-          <Table.Tr>
-            <Th>
-              Quest Name
-            </Th>
-            <Th>
-              Status
-            </Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {rows}
-        </Table.Tbody>
-      </Table>
+      <Table.ScrollContainer maxHeight={800} minWidth={500}>
+        <Table horizontalSpacing="md" verticalSpacing="xs" layout="fixed">
+          <Table.Thead>
+            <Table.Tr>
+              <Th>
+                Quest Name
+              </Th>
+              <Th>
+                Status
+              </Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
+            {rows}
+          </Table.Tbody>
+        </Table>
+      </Table.ScrollContainer>
     </div>
   );
 }
