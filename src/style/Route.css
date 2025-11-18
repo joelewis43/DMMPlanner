@@ -1,6 +1,6 @@
 /* Main container */
 .route-container {
-  
+  padding: 5px;
 }
 
 
@@ -8,7 +8,7 @@
 /* Header */
 
 .task-list-header {
-   margin-left: 5px;
+  margin-left: 5px;
   margin-right: 5px;
   display: flex;
   border-bottom: 2px dotted var(--color-secondary);
@@ -55,23 +55,21 @@
 }
 
 .button-container {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: right;
+  margin-left: auto;
   gap: 5px;
 }
 
 .step-button {
   cursor: pointer;
-  font-size: 18px;
+  font-size: 32px;
   background: none;
   border: none;
-  color: var(--color-text);
+  color: black;
 }
 
 .step-button:hover {
   color: var(--color-secondary);
+  background-color: transparent;
 }
 
 

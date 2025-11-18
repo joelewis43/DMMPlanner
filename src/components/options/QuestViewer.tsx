@@ -82,7 +82,7 @@ export default function QuestViewer() {
         value={search}
         onChange={handleSearchChange}
       />
-      <Table.ScrollContainer maxHeight={800} minWidth={500}>
+      <Table.ScrollContainer maxHeight={900} minWidth={500}>
         <Table horizontalSpacing="md" verticalSpacing="xs" layout="fixed">
           <Table.Thead>
             <Table.Tr>

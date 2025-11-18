@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouteContext } from '../../providers/RouteProvider';
-import { Button, SimpleGrid } from '@mantine/core';
+import { Button, ScrollArea, SimpleGrid } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import AddStepModal from './AddStepModal';
 import {
@@ -54,11 +54,13 @@ const Route: React.FC<RouteProps> = ({ }) => {
     <div className='content-frame route-container'>
       <SimpleGrid cols={{ base: 5, sm: 3 }} mb="md">{buttons}</SimpleGrid>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={route.map((i) => i.id)} strategy={verticalListSortingStrategy}>
-          {route.map((item) => (
-            <SortableStep step={item} />
-          ))}
-        </SortableContext>
+        <ScrollArea h={900}>
+          <SortableContext items={route.map((i) => i.id)} strategy={verticalListSortingStrategy}>
+            {route.map((item) => (
+              <SortableStep step={item} />
+            ))}
+          </SortableContext>
+        </ScrollArea>
       </DndContext>
       <AddStepModal opened={addOpened} onClose={addHandlers.close} />
     </div>

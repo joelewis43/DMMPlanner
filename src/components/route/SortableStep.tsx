@@ -3,14 +3,18 @@ import { RouteStep } from "../../types/RouteStep";
 import cx from 'clsx';
 import classes from '../../style/DndListHandle.module.css';
 import { IconGripVertical } from "@tabler/icons-react";
-import { Text } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 import { CSS } from '@dnd-kit/utilities';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouteContext } from "../../providers/RouteProvider";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface SortableStepProps {
   step: RouteStep;
 }
 
 const SortableStep: React.FC<SortableStepProps> = ({ step }) => {
+  const { deleteStepFromRoute } = useRouteContext();
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
     id: step.id,
   });
@@ -34,6 +38,11 @@ const SortableStep: React.FC<SortableStepProps> = ({ step }) => {
         <Text c="dimmed" size="sm">
           ID: {step.id} • Type: {step.type}
         </Text>
+      </div>
+      <div className="button-container">
+        <Button onClick={() => deleteStepFromRoute(step.id)} className="step-button">
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
       </div>
     </div>
   );
