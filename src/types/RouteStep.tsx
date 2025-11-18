@@ -11,5 +11,8 @@ export type RouteStepInput = Omit<RouteStep, 'id'>;
 
 export enum RouteType {
   Quest = 'Quest',
+  Travel = 'Travel',
+  Combat = 'Combat',
+  Action = 'Action',
   Other = 'Other'
 }

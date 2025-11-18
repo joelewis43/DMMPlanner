@@ -120,7 +120,6 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         closeOnEscape={false}
         withCloseButton={false}
         title={activeLamp ? `Choose a Skill for ${activeLamp.questName}` : ''}
-        centered
         size="md"
       >
         {activeLamp && (

@@ -1,47 +1,66 @@
-import React, { useState, useCallback } from 'react';
-import update from 'immutability-helper';
+import React from 'react';
 import { useRouteContext } from '../../providers/RouteProvider';
-import DraggableStep from './DraggableStep';
-import { RouteStep } from '../../types/RouteStep';
-
-const ItemType = 'TILE';
+import { Button, SimpleGrid } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import AddStepModal from './AddStepModal';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import SortableStep from './SortableStep';
 
 interface RouteProps {
 }
 
 const Route: React.FC<RouteProps> = ({ }) => {
-  const { route, setRoute, editRouteStep } = useRouteContext();
-  const [showEditStep, setShowEditStep] = useState(false);
-  const [selectedStep, setSelectedStep] = useState<RouteStep>();
+  const { route, setRoute } = useRouteContext();
+  const [addOpened, addHandlers] = useDisclosure(false);
 
-  const moveStep = useCallback((fromIndex: number, toIndex: number) => {
-    setRoute((prevSteps) =>
-      update(prevSteps, {
-        $splice: [
-          [fromIndex, 1],
-          [toIndex, 0, prevSteps[fromIndex]],
-        ],
-      })
-    );
-  }, []);
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor)
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) {
+      return;
+    }
+    const oldIndex = route.findIndex((i) => i.id === active.id);
+    const newIndex = route.findIndex((i) => i.id === over.id);
+    setRoute(arrayMove(route, oldIndex, newIndex));
+  };
+
+  const buttons = (
+    <>
+      <Button key={"Add"} onClick={() => addHandlers.open()}>Add Step</Button>
+      <Button key={"Import"}>Import</Button>
+      <Button key={"Export"}>Export</Button>
+    </>
+  );
 
   return (
     <div className='content-frame route-container'>
-      <div className='task-list-header'>
-        <h4 className='route-col'>Step</h4>
-        <h4 className='route-col'>ID</h4>
-      </div>  
-      <div className='step-container'>
-        {route.map((step, index) => (
-          <DraggableStep
-            key={step.id}
-            index={index}
-            step={step}
-            moveStep={moveStep}
-            type={ItemType}
-          />
-        ))}
-      </div>
+      <SimpleGrid cols={{ base: 5, sm: 3 }} mb="md">{buttons}</SimpleGrid>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={route.map((i) => i.id)} strategy={verticalListSortingStrategy}>
+          {route.map((item) => (
+            <SortableStep step={item} />
+          ))}
+        </SortableContext>
+      </DndContext>
+      <AddStepModal opened={addOpened} onClose={addHandlers.close} />
     </div>
   );
 };
