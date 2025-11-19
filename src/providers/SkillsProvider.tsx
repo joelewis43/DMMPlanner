@@ -32,22 +32,25 @@ export const SkillsProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   }, [combatLevel]);
 
   const updateSkill = (name: SkillName, addedXp: number) => {
-    const skill = skills[name];
-    const mult = skill.combatSkill ? combatMultiplier : nonCombatMultiplier;
-    const newXp = skill.xp + addedXp * mult;
-    const newLevel = DetermineLevel(newXp);
-    const updatedSkill: Skill = {
-      name: name,
-      xp: newXp,
-      level: newLevel,
-      xpToNextLeve: DetermineXpToNextLevel(newXp, newLevel),
-      xpPercentage: DetermineXpPercentage(newXp, newLevel),
-      combatSkill: skill.combatSkill,
-    }
-    setSkills(prev => ({
-      ...prev,
-      [name]: updatedSkill
-    }))
+    setSkills(prev => {
+      const skill = prev[name];
+      const mult = skill.combatSkill ? combatMultiplier : nonCombatMultiplier;
+      const newXp = skill.xp + (addedXp * mult);
+      const newLevel = DetermineLevel(newXp);
+      const updatedSkill: Skill = {
+        name: name,
+        xp: newXp,
+        level: newLevel,
+        xpToNextLeve: DetermineXpToNextLevel(newXp, newLevel),
+        xpPercentage: DetermineXpPercentage(newXp, newLevel),
+        combatSkill: skill.combatSkill,
+      };
+
+      return {
+        ...prev,
+        [name]: updatedSkill
+      };
+    });
   }
 
   return (

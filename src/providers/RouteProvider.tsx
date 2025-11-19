@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { RouteStep, RouteStepInput, RouteType } from '../types/RouteStep';
 import { v5 as uuidv5 } from 'uuid';
-import { v4 as uuidv4 } from 'uuid';
 import { QuestData } from '../types/Quests';
 import { useQuestContext } from './QuestProvider';
 
@@ -13,7 +12,6 @@ interface RouteContextType {
   editRouteStep: (step: RouteStep) => void;
   deleteStepFromRoute: (id: string) => void;
   importRoute: (route: RouteStep[]) => void;
-  addDummyStep: () => void;
   appendQuest: (input: QuestData) => void;
 }
 
@@ -23,10 +21,6 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [route, setRoute] = useState<RouteStep[]>([]);
 
   const { incompleteQuest } = useQuestContext();
-
-  useEffect(() => {
-    console.log(route);
-  }, [route]);
 
   const appendRoute = (input: RouteStepInput) => {
     const newId = uuidv5(input.name, uuidv5.DNS);
@@ -58,14 +52,6 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setRoute(importedRoute);
   }
 
-  const addDummyStep = () => {
-    setRoute([...route, {
-      name: "This is a test",
-      id: uuidv4(),
-      type: RouteType.Other
-    }])
-  }
-
   const appendQuest = (input: QuestData) => {
     const newId = uuidv5(input.name, uuidv5.DNS);
     if (isPresent(newId)) return;
@@ -82,7 +68,7 @@ export const RouteProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }
 
   return (
-    <RouteContext.Provider value={{ route, setRoute, appendRoute, editRouteStep, deleteStepFromRoute, importRoute, addDummyStep, appendQuest }}>
+    <RouteContext.Provider value={{ route, setRoute, appendRoute, editRouteStep, deleteStepFromRoute, importRoute, appendQuest }}>
       {children}
     </RouteContext.Provider>
   );

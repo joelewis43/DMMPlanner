@@ -25,12 +25,11 @@ const AddStepModal: React.FC<AddStepModalProps> = ({ opened, onClose }) => {
 
   const handleSubmit = (values: RouteStepInput) => {
     const validation = form.validate();
-  if (!validation.hasErrors) {
-    console.log('Form submitted:', values);
-    appendRoute(values);
-    form.reset();
-    onClose();
-  }
+    if (!validation.hasErrors) {
+      appendRoute(values);
+      form.reset();
+      onClose();
+    }
   };
 
 
@@ -53,9 +52,6 @@ const AddStepModal: React.FC<AddStepModalProps> = ({ opened, onClose }) => {
         />
 
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-          <Button variant="subtle" onClick={close}>
-            Cancel
-          </Button>
           <Button type="submit">
             Submit
           </Button>

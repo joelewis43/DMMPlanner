@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { QuestData, questsMap, XpLamp } from '../types/Quests';
 import { useSkillsContext } from './SkillsProvider';
 import { SkillName } from '../types/Skills';
@@ -21,7 +21,7 @@ interface RenderLampData {
 const QuestContext = createContext<QuestContextType | undefined>(undefined);
 
 export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [quests] = useState<Map<string, QuestData>>(questsMap);
+  const [quests, setQuests] = useState<Map<string, QuestData>>(questsMap);
   const { updateSkill } = useSkillsContext();
 
   // Modal state
@@ -57,6 +57,24 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     // Ingress for Lamp workflow
     if (quest.rewards?.lamps) {
+      if (removeXp) {
+        // don't need to setLamp and open modal, instead remove xp for selected skills
+        for (const skill of quest.rewards.lamps.selectedSkills!) {
+          const xp = quest.rewards.lamps.xpValue * -1;
+          updateSkill(skill as SkillName, xp);
+        }
+
+        // remove skill selections from state
+        setQuests(prevQuests => {
+          const newMap = new Map(prevQuests);
+          const currentQuest = quests.get(quest.name)!;
+          currentQuest.rewards.lamps!.selectedSkills = new Array<string>();
+          newMap.set(quest.name, { ...currentQuest });
+          return newMap;
+        })
+
+        return;
+      }
       const lamp = quest.rewards.lamps;
       setActiveLamp({
         lamp,
@@ -71,12 +89,27 @@ export const QuestProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const handleSkillSelection = (selectedSkill: SkillName) => {
     if (activeLamp) {
-      const { lamp, removeXp, remainingGrants } = activeLamp;
+      const { lamp, removeXp, remainingGrants, questName } = activeLamp;
 
       // Apply XP for this single grant
       let xp = lamp.xpValue;
       if (removeXp) xp = -1 * xp;
       updateSkill(selectedSkill, xp);
+
+      // Update quest state to record selected skill
+      setQuests(prevQuests => {
+        const newMap = new Map(prevQuests);
+        const currentQuest = quests.get(questName);
+        if (currentQuest) {
+          if (currentQuest.rewards.lamps!.selectedSkills) {
+            currentQuest.rewards.lamps!.selectedSkills.push(selectedSkill);
+          } else {
+            currentQuest.rewards.lamps!.selectedSkills = new Array<string>(selectedSkill);
+          }
+          newMap.set(questName, { ...currentQuest });
+        }
+        return newMap;
+      })
 
       // Check if there are more grants remaining
       const newRemainingGrants = remainingGrants - 1;

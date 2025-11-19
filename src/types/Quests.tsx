@@ -17,6 +17,7 @@ export interface XpLamp {
   levelReq: number,
   grants: number,
   xpValue: number,
+  selectedSkills?: string[]
 }
 
 export const questsMap: Map<string, QuestData> = new Map(
